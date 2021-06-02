@@ -4,11 +4,13 @@ import { ApolloProvider } from '@apollo/client/react'
 import { client } from './init/client';
 
 import {Pet }from './bus/pet'
+import { Customer } from './bus/customer/index';
 
 export default function App() {
     return (
         <ApolloProvider client={client}>
-            <Pet />
+            {/* <Customer /> */}
+            <Pet/>
         </ApolloProvider>
     )
 }
