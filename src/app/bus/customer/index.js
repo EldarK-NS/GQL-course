@@ -1,17 +1,16 @@
 import React from 'react'
-import { useCustomer } from './hooks/useCustomer/index';
+import { useCustomerCreator } from './hooks/useCustomerCreator/index';
 
 export const Customer = () => {
-    const { handleChange, save, createdAccount } = useCustomer()
+    const { handleChange, save, createdAccount } = useCustomerCreator()
 
     const customerJSX = createdAccount && (
         <>
             <p>We created account:</p>
-            <p>
-                <span>Name:{createdAccount.name}</span>
-                <span>UserName:{createdAccount.username}</span>
-                <span>Created At:{createdAccount.dateCreated}</span>
-            </p>
+            <div>
+                <div>Name:{createdAccount.name}</div>
+                <div>UserName:{createdAccount.username}</div>
+            </div>
         </>
 
     )

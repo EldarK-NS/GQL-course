@@ -8,7 +8,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "apollo": "^2.33.4",
     "apollo-boost": "^0.4.9",
+    "apollo-link-http": "^1.5.17",
     "graphql": "^15.5.0",
     "graphql.macro": "^1.4.2",
     "react": "^17.0.2",
@@ -20,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "apollo:download-schema": "apollo client:download-schema --endpoint 'https://funded-pet-library.moonhighway.com/' /schema.json"
   },
   "eslintConfig": {
     "extends": [
