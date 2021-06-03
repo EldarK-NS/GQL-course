@@ -1,17 +1,31 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, InMemoryCache, split } from '@apollo/client'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from "@apollo/client/link/context"
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { getMainDefinition } from '@apollo/client/utilities'
 
+const root = 'funded-pet-library.moonhighway.com/'
 
 // GraphQL Server
-const uri = "https://funded-pet-library.moonhighway.com/"
+const uri = `https://${root}`
 
 const httpLink = createHttpLink({ uri })
 
-//Auth
 
+
+
+//WS
+const wsLink = new WebSocketLink({
+    uri: `wss://${root}graphql`,
+    options:{
+        reconnect: true
+    }
+})
+
+//Auth
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token')
+
     return {
         headers: {
             ...headers,
@@ -20,7 +34,21 @@ const authLink = setContext((_, { headers }) => {
     }
 })
 
+const wrappedHttpLink = authLink.concat(httpLink)
+
+// WS
+const link = split(({ query }) => {
+    const definiton = getMainDefinition(query)
+    return (
+        definiton.kind === "OperationDefinition" &&
+        definiton.operation === "subscription"
+    )
+},
+    wsLink,
+    wrappedHttpLink
+)
+
 export const client = new ApolloClient({
-    link: authLink.concat(httpLink),
+    link,
     cache: new InMemoryCache()
 })

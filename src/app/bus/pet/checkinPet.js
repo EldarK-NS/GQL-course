@@ -22,7 +22,7 @@ export const CheckinPet = () => {
     return (
         <div>
             <h1>Check In</h1>
-            <button onClick={() => checkIn("C-5")}>ChekIn</button>
+            <button onClick={() => checkIn("C-1")}>ChekIn</button>
             {petJSX}
             {errorsJSX}
             {errorJSX}
