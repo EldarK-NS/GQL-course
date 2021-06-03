@@ -1,19 +1,21 @@
 import React from 'react'
 // import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloProvider } from '@apollo/client/react'
-import { client } from './init/client';
+import { client } from './init/modern';
 
-import {Pet }from './bus/pet'
-import { Customer } from './bus/customer/index';
-import { Login } from './bus/customer/login';
+// import {Pet }from './bus/pet'
+// import { Customer } from './bus/customer/index';
+// import { Login } from './bus/customer/login';
+import { User } from './bus/user/index';
 
 
 export default function App() {
     return (
         <ApolloProvider client={client}>
-            <Customer />
+            <User />
+            {/* <Customer />
             <Login />
-            <Pet/>
+            <Pet/> */}
         </ApolloProvider>
     )
 }
